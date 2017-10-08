@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="nginx," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="我努力奔跑就是为了追上曾经那个被寄予厚望的自己">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Miss_Dai&#39;s Notes">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="“代理”顾名思义，就是不通过自己，通过第三方去代替自己执行自己要做的事情。可以想象成在本机和目标服务器中又多了一个中间服务器（代理服务器）。 一般如果我们说代理的话指的就是正向代理。 正向代理正向代理是一个位于客户端和原始服务器之间的服务器（代理服务器，即 proxy），他的工作就像一个跳板（我的理解就相当于路由）。 在这种情况下，客户端需要知道 proxy 的存在，当他需要访问某个服务器时，可以">
+<meta name="keywords" content="nginx">
+<meta property="og:type" content="article">
+<meta property="og:title" content="正向代理和反向代理">
+<meta property="og:url" content="http://yoursite.com/2017/10/08/正向代理和反向代理/index.html">
 <meta property="og:site_name" content="Miss_Dai&#39;s Notes">
-<meta property="og:description" content="我努力奔跑就是为了追上曾经那个被寄予厚望的自己">
+<meta property="og:description" content="“代理”顾名思义，就是不通过自己，通过第三方去代替自己执行自己要做的事情。可以想象成在本机和目标服务器中又多了一个中间服务器（代理服务器）。 一般如果我们说代理的话指的就是正向代理。 正向代理正向代理是一个位于客户端和原始服务器之间的服务器（代理服务器，即 proxy），他的工作就像一个跳板（我的理解就相当于路由）。 在这种情况下，客户端需要知道 proxy 的存在，当他需要访问某个服务器时，可以">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-08T15:06:34.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Miss_Dai&#39;s Notes">
-<meta name="twitter:description" content="我努力奔跑就是为了追上曾经那个被寄予厚望的自己">
+<meta name="twitter:title" content="正向代理和反向代理">
+<meta name="twitter:description" content="“代理”顾名思义，就是不通过自己，通过第三方去代替自己执行自己要做的事情。可以想象成在本机和目标服务器中又多了一个中间服务器（代理服务器）。 一般如果我们说代理的话指的就是正向代理。 正向代理正向代理是一个位于客户端和原始服务器之间的服务器（代理服务器，即 proxy），他的工作就像一个跳板（我的理解就相当于路由）。 在这种情况下，客户端需要知道 proxy 的存在，当他需要访问某个服务器时，可以">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/08/正向代理和反向代理/"/>
 
 
 
 
 
-  <title>Miss_Dai's Notes</title>
+  <title>正向代理和反向代理 | Miss_Dai's Notes</title>
   
 
 
@@ -143,8 +145,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -279,9 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/08/正向代理和反向代理/" itemprop="url">正向代理和反向代理</a></h1>
+          <h1 class="post-title" itemprop="name headline">正向代理和反向代理</h1>
         
 
         <div class="post-meta">
@@ -331,20 +330,51 @@
       
 
       
-        
-          <p>“代理”顾名思义，就是不通过自己，通过第三方去代替自己执行自己要做的事情。可以想象成在本机和目标服务器中又多了一个中间服务器（代理服务器）。</p>
+        <p>“代理”顾名思义，就是不通过自己，通过第三方去代替自己执行自己要做的事情。可以想象成在本机和目标服务器中又多了一个中间服务器（代理服务器）。</p>
 <p>一般如果我们说代理的话指的就是正向代理。</p>
 <h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p><strong>正向代理</strong>是一个位于客户端和原始服务器之间的服务器（代理服务器，即 proxy），他的工作就像一个跳板（我的理解就相当于路由）。</p>
 <p>在这种情况下，客户端需要知道 proxy 的存在，当他需要访问某个服务器时，可以先去访问 proxy，proxy 知道服务器的位置，因此找到服务器拿到对应资源或数据返回给客户端，对服务器来说客户端可以是不透明的，它可能不知道是哪一个客户端进行的访问。</p>
 <p><strong>简单说明，就是代理服务器代替客户端去访问目标服务器。（隐藏客户端）</strong></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/08/正向代理和反向代理/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+<p>正向代理一般需要在客户端做一些设置才可以用。</p>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li><p><strong>绕过无法访问的结点，从另一条路由路径进行目标服务器的访问（比如 翻墙）</strong></p>
+<p>例如，我想访问 google.com ，但是由于防火墙无法直接访问到 google.com 的 server，但是 proxy 可以做到，它知道如何访问到 google.com，因此在客户端做一些设置，当它需要访问 google.com 的时候就去访问 proxy，proxy 再去访问到 server，将页面返回给客户端；</p>
+</li>
+<li><p><strong>隐藏访问者，通过配置，目标服务器只能获得到代理服务器的信息，无法获取真实访客的信息</strong></p>
+<p>出于某种原因，客户端不希望 server 知道是自己访问的它，因此需要 proxy 做一些隔离的工作，使得server 端只知道是 proxy 访问的它，而不知道真正的客户端；</p>
+</li>
+<li><p><strong>用作缓存，数据缓存在代理服务器中，若客户端请求的数据在缓存中则不去访问目标主机</strong></p>
+<p>proxy 可以有 cache 功能，例如某公司会希望 proxy 缓存一些员工经常访问的网站，当有一个人访问的时候 proxy 就将该网站存入自己的 cache 中，下次再有人访问的时候就直接从 proxy 中返回这个页面而不用每次都去访问 server，这样的好处是节省了带宽，因为如果一个人访问该网站需要 1m 带宽，100个人同时访问就需要 100m 带宽，而实际情况是 server 只有 10m 的带宽，这样就会造成 server 超负载，就会影响访问效率。</p>
+</li>
+<li><p><strong>权限控制，防火墙授权代理服务器访问权限，客户端通过正向代理可以通过防火墙（比如 一些公司采用的ISA SERVER 权限判断）</strong></p>
+</li>
+<li><p><strong>加速访问，通过不同的路由路径提高访问速度（现在通过带宽的提高等方式，基本不用此方式提速）</strong></p>
+<p>（<strong><em>后两条有待研究，暂时忽略</em></strong>）</p>
+<p>⚠️ <strong><em>注意</em></strong>： proxy 可以将客户端对 server 端隐藏，但是也可以告诉 server 端 “是XXX让我来访问你的”。这分为两种情况，一种是客户端无法直接访问 server 而不得不通过 proxy，另一种是client 愿意通过 proxy 去访问 server，将中间的工作放心地交给 proxy；</p>
+<p> 另外，正向代理的 proxy 也可以是多级，这样就会使得访问过程很难被反向追踪，增加了访问的安全度。</p>
+</li>
+</ul>
+<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p><strong>反向代理</strong>和正向代理相反，它是用来完成server端的代理工作的，并且客户端不需要进行任何特别的设置。客户端向反向代理发送普通请求，接着反向代理将判断向原始服务器转交请求，并将获得的内容返回给客户端，就像这些内容原本就是它自己的一样。</p>
+<p><strong>简单说明，就是代理服务器代替目标服务器去接受并返回客户端的请求。（隐藏目标服务器）</strong></p>
+<p>此时，对 reverse proxy 来说，它必须知道目标服务器的存在，即要知道如何访问到目标服务器，对客户端来说，reverse proxy 就是目标服务器，实际上它是不知道真实服务器的存在的，它关心的只是当访问某个网站的时候能够看到对应的页面就好了，并不关心这个页面是谁提供的，例如拨打10086人工服务的时候用户永远不知道也不需要知道到底是哪个区域的人提供的服务，只要有人提供服务就好了，但是 reverse proxy 必须知道目标服务器的存在，不然就无法访问到它，而目标服务器却不知道 reverse proxy 的存在。</p>
+<h3 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li><p><strong>隐藏原始服务器，防止服务器恶意攻击等，让客户端认为代理服务器是原始服务器</strong></p>
+</li>
+<li><p><strong>缓存左右，将原始服务器数据进行缓存，减少原始服务器的访问压力</strong></p>
+<p>reverse proxy 也可以像 proxy 一样提供 cache 功能，例如对于某些每次访问都相同的静态资源，例如图片等信息，就可以将它们存在 reverse proxy 中，用来提高访问效率。</p>
+</li>
+<li><p><strong>负载均衡</strong></p>
+<p>假设有一个 server 集群，如果没有 reverse proxy，这些 server 全部都暴露给客户端，当有一台 server 出现问题的时候就得通知客户端这里有台 server 是坏掉的，当全部坏掉的时候就会宕机，对客户端来说是不友好的。而使用 reverse proxy 的话它就会对这些 server 集群进行管理，当有 server 出现故障的时候它就会将客户端的请求发送到其他 server，因此客户端总能得到想要的服务（通过设置 reverse proxy 告诉它哪些 server 是可以提供正常服务的），这样的好处是当有大量客户端访问server 的时候 reverse proxy 可以进行相应的“调度”，将服务分散到不同的 server 上，减少server 的负担；</p>
+<p>⚠️ <strong><em>注意</em></strong>：server 集群应该提供相同的服务，也就是牲口模式，当有一个出现问题的时候其他server可以替代其进行服务，而不至于整个服务 down 掉。</p>
+<p><strong><em>扩展说明</em></strong></p>
+<p>对于反向代理的应用主要需求是负载均衡，可能出现从客户端到服务端的过程中同时用到了正向代理和反向代理，反向代理主要应用于 http 层面。</p>
+<p>常用的 reverse proxy: nginx、apache、varnish、squid、lighted</p>
+<p>( apache、lighted基本不用了)</p>
+<p>reverse proxy 的 cache 分为硬盘级别和内存级别，内存级别会快得多（主要区分于 varnish 和squid ）。</p>
+</li>
+</ul>
+
       
     </div>
     
@@ -359,14 +389,20 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/nginx/" rel="tag"># nginx</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -376,10 +412,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -387,6 +424,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -407,8 +448,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -485,6 +535,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正向代理"><span class="nav-number">1.</span> <span class="nav-text">正向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">1.1.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向代理"><span class="nav-number">2.</span> <span class="nav-text">反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-1"><span class="nav-number">2.1.</span> <span class="nav-text">应用场景</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -613,6 +679,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
