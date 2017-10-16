@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="nginx," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="“代理”顾名思义，就是不通过自己，通过第三方去代替自己执行自己要做的事情。可以想象成在本机和目标服务器中又多了一个中间服务器（代理服务器）。 一般如果我们说代理的话指的就是正向代理。 正向代理正向代理是一个位于客户端和原始服务器之间的服务器（代理服务器，即 proxy），他的工作就像一个跳板（我的理解就相当于路由）。 在这种情况下，客户端需要知道 proxy 的存在，当他需要访问某个服务器时，可以">
-<meta name="keywords" content="nginx">
+<meta name="description" content="1. 什么是 SSHSSH是一种网络协议，用于计算机之间的加密登录。 最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。 SSH 只是加密的shell，最初是用来替代telnet的。通过port forward，">
+<meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
-<meta property="og:title" content="正向代理和反向代理">
-<meta property="og:url" content="http://yoursite.com/2017/10/08/正向代理和反向代理/index.html">
+<meta property="og:title" content="SSH、SSL 以及 OpenSSH、OpenSSL 的区别">
+<meta property="og:url" content="http://yoursite.com/2017/10/16/SSH、SSL-以及-OpenSSH、OpenSSL-的区别/index.html">
 <meta property="og:site_name" content="Miss_Dai&#39;s Notes">
-<meta property="og:description" content="“代理”顾名思义，就是不通过自己，通过第三方去代替自己执行自己要做的事情。可以想象成在本机和目标服务器中又多了一个中间服务器（代理服务器）。 一般如果我们说代理的话指的就是正向代理。 正向代理正向代理是一个位于客户端和原始服务器之间的服务器（代理服务器，即 proxy），他的工作就像一个跳板（我的理解就相当于路由）。 在这种情况下，客户端需要知道 proxy 的存在，当他需要访问某个服务器时，可以">
+<meta property="og:description" content="1. 什么是 SSHSSH是一种网络协议，用于计算机之间的加密登录。 最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。 SSH 只是加密的shell，最初是用来替代telnet的。通过port forward，">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-08T15:06:34.000Z">
+<meta property="og:updated_time" content="2017-10-16T10:07:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="正向代理和反向代理">
-<meta name="twitter:description" content="“代理”顾名思义，就是不通过自己，通过第三方去代替自己执行自己要做的事情。可以想象成在本机和目标服务器中又多了一个中间服务器（代理服务器）。 一般如果我们说代理的话指的就是正向代理。 正向代理正向代理是一个位于客户端和原始服务器之间的服务器（代理服务器，即 proxy），他的工作就像一个跳板（我的理解就相当于路由）。 在这种情况下，客户端需要知道 proxy 的存在，当他需要访问某个服务器时，可以">
+<meta name="twitter:title" content="SSH、SSL 以及 OpenSSH、OpenSSL 的区别">
+<meta name="twitter:description" content="1. 什么是 SSHSSH是一种网络协议，用于计算机之间的加密登录。 最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。 SSH 只是加密的shell，最初是用来替代telnet的。通过port forward，">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/10/08/正向代理和反向代理/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/10/16/SSH、SSL-以及-OpenSSH、OpenSSL-的区别/"/>
 
 
 
 
 
-  <title>正向代理和反向代理 | Miss_Dai's Notes</title>
+  <title>SSH、SSL 以及 OpenSSH、OpenSSL 的区别 | Miss_Dai's Notes</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/08/正向代理和反向代理/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/16/SSH、SSL-以及-OpenSSH、OpenSSL-的区别/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Miss_Dai">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">正向代理和反向代理</h1>
+          <h1 class="post-title" itemprop="name headline">SSH、SSL 以及 OpenSSH、OpenSSL 的区别</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-08T23:03:00+08:00">
-                2017-10-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-16T18:02:03+08:00">
+                2017-10-16
               </time>
             
 
@@ -330,50 +330,30 @@
       
 
       
-        <p>“代理”顾名思义，就是不通过自己，通过第三方去代替自己执行自己要做的事情。可以想象成在本机和目标服务器中又多了一个中间服务器（代理服务器）。</p>
-<p>一般如果我们说代理的话指的就是正向代理。</p>
-<h2 id="正向代理"><a href="#正向代理" class="headerlink" title="正向代理"></a>正向代理</h2><p><strong>正向代理</strong>是一个位于客户端和原始服务器之间的服务器（代理服务器，即 proxy），他的工作就像一个跳板（我的理解就相当于路由）。</p>
-<p>在这种情况下，客户端需要知道 proxy 的存在，当他需要访问某个服务器时，可以先去访问 proxy，proxy 知道服务器的位置，因此找到服务器拿到对应资源或数据返回给客户端，对服务器来说客户端可以是不透明的，它可能不知道是哪一个客户端进行的访问。</p>
-<p><strong>简单说明，就是代理服务器代替客户端去访问目标服务器。（隐藏客户端）</strong></p>
+        <h2 id="1-什么是-SSH"><a href="#1-什么是-SSH" class="headerlink" title="1. 什么是 SSH"></a>1. 什么是 SSH</h2><p><strong>SSH是一种网络协议，用于计算机之间的加密登录。</strong></p>
+<p>最早的时候，互联网通信都是明文通信，一旦被截获，内容就暴露无疑。1995年，芬兰学者Tatu Ylonen设计了SSH协议，将登录信息全部加密，成为互联网安全的一个基本解决方案，迅速在全世界获得推广，目前已经成为Linux系统的标准配置。</p>
+<p>SSH 只是加密的shell，最初是用来替代telnet的。通过port forward，也可以让其他协议通过ssh的隧道而起到加密的效果。</p>
 <a id="more"></a>
-<p>正向代理一般需要在客户端做一些设置才可以用。</p>
-<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
-<li><p><strong>绕过无法访问的结点，从另一条路由路径进行目标服务器的访问（比如 翻墙）</strong></p>
-<p>例如，我想访问 google.com ，但是由于防火墙无法直接访问到 google.com 的 server，但是 proxy 可以做到，它知道如何访问到 google.com，因此在客户端做一些设置，当它需要访问 google.com 的时候就去访问 proxy，proxy 再去访问到 server，将页面返回给客户端；</p>
-</li>
-<li><p><strong>隐藏访问者，通过配置，目标服务器只能获得到代理服务器的信息，无法获取真实访客的信息</strong></p>
-<p>出于某种原因，客户端不希望 server 知道是自己访问的它，因此需要 proxy 做一些隔离的工作，使得server 端只知道是 proxy 访问的它，而不知道真正的客户端；</p>
-</li>
-<li><p><strong>用作缓存，数据缓存在代理服务器中，若客户端请求的数据在缓存中则不去访问目标主机</strong></p>
-<p>proxy 可以有 cache 功能，例如某公司会希望 proxy 缓存一些员工经常访问的网站，当有一个人访问的时候 proxy 就将该网站存入自己的 cache 中，下次再有人访问的时候就直接从 proxy 中返回这个页面而不用每次都去访问 server，这样的好处是节省了带宽，因为如果一个人访问该网站需要 1m 带宽，100个人同时访问就需要 100m 带宽，而实际情况是 server 只有 10m 的带宽，这样就会造成 server 超负载，就会影响访问效率。</p>
-</li>
-<li><p><strong>权限控制，防火墙授权代理服务器访问权限，客户端通过正向代理可以通过防火墙（比如 一些公司采用的ISA SERVER 权限判断）</strong></p>
-</li>
-<li><p><strong>加速访问，通过不同的路由路径提高访问速度（现在通过带宽的提高等方式，基本不用此方式提速）</strong></p>
-<p>（<strong><em>后两条有待研究，暂时忽略</em></strong>）</p>
-<p>⚠️ <strong><em>注意</em></strong>： proxy 可以将客户端对 server 端隐藏，但是也可以告诉 server 端 “是XXX让我来访问你的”。这分为两种情况，一种是客户端无法直接访问 server 而不得不通过 proxy，另一种是client 愿意通过 proxy 去访问 server，将中间的工作放心地交给 proxy；</p>
-<p> 另外，正向代理的 proxy 也可以是多级，这样就会使得访问过程很难被反向追踪，增加了访问的安全度。</p>
-</li>
-</ul>
-<h2 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h2><p><strong>反向代理</strong>和正向代理相反，它是用来完成server端的代理工作的，并且客户端不需要进行任何特别的设置。客户端向反向代理发送普通请求，接着反向代理将判断向原始服务器转交请求，并将获得的内容返回给客户端，就像这些内容原本就是它自己的一样。</p>
-<p><strong>简单说明，就是代理服务器代替目标服务器去接受并返回客户端的请求。（隐藏目标服务器）</strong></p>
-<p>此时，对 reverse proxy 来说，它必须知道目标服务器的存在，即要知道如何访问到目标服务器，对客户端来说，reverse proxy 就是目标服务器，实际上它是不知道真实服务器的存在的，它关心的只是当访问某个网站的时候能够看到对应的页面就好了，并不关心这个页面是谁提供的，例如拨打10086人工服务的时候用户永远不知道也不需要知道到底是哪个区域的人提供的服务，只要有人提供服务就好了，但是 reverse proxy 必须知道目标服务器的存在，不然就无法访问到它，而目标服务器却不知道 reverse proxy 的存在。</p>
-<h3 id="应用场景-1"><a href="#应用场景-1" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
-<li><p><strong>隐藏原始服务器，防止服务器恶意攻击等，让客户端认为代理服务器是原始服务器</strong></p>
-</li>
-<li><p><strong>缓存左右，将原始服务器数据进行缓存，减少原始服务器的访问压力</strong></p>
-<p>reverse proxy 也可以像 proxy 一样提供 cache 功能，例如对于某些每次访问都相同的静态资源，例如图片等信息，就可以将它们存在 reverse proxy 中，用来提高访问效率。</p>
-</li>
-<li><p><strong>负载均衡</strong></p>
-<p>假设有一个 server 集群，如果没有 reverse proxy，这些 server 全部都暴露给客户端，当有一台 server 出现问题的时候就得通知客户端这里有台 server 是坏掉的，当全部坏掉的时候就会宕机，对客户端来说是不友好的。而使用 reverse proxy 的话它就会对这些 server 集群进行管理，当有 server 出现故障的时候它就会将客户端的请求发送到其他 server，因此客户端总能得到想要的服务（通过设置 reverse proxy 告诉它哪些 server 是可以提供正常服务的），这样的好处是当有大量客户端访问server 的时候 reverse proxy 可以进行相应的“调度”，将服务分散到不同的 server 上，减少server 的负担；</p>
-<p>⚠️ <strong><em>注意</em></strong>：server 集群应该提供相同的服务，也就是牲口模式，当有一个出现问题的时候其他server可以替代其进行服务，而不至于整个服务 down 掉。</p>
-<p><strong><em>扩展说明</em></strong></p>
-<p>对于反向代理的应用主要需求是负载均衡，可能出现从客户端到服务端的过程中同时用到了正向代理和反向代理，反向代理主要应用于 http 层面。</p>
-<p>常用的 reverse proxy: nginx、apache、varnish、squid、lighted</p>
-<p>( apache、lighted基本不用了)</p>
-<p>reverse proxy 的 cache 分为硬盘级别和内存级别，内存级别会快得多（主要区分于 varnish 和squid ）。</p>
-</li>
-</ul>
+<p><strong><em>（Telnet是远程连接服务，它工作于在tcp/ip协议的应用层，telnet命令通常用来远程登录。但是，telnet因为采用明文传送报文，安全性不好，很多Linux服务器都不开放telnet服务，而改用更安全的ssh方式了。）</em></strong></p>
+<p>SSH 的英文全称是Secure SHell。通过使用SSH，你可以把所有传输的数据进行加密，这样“中间人”这种攻击方式就不可能实现了，而且也能够防止DNS和IP欺骗。还有一个额外的好处就是传输的数据是经过压缩的，所以可以加快传输的速度。</p>
+<p>SSH有很多功能，它既可以代替telnet，又可以为ftp、pop、甚至ppp提供一 个安全的“通道”。SSH是由客户端和服务端的软件组成的，有两个不兼容的版本分别是：1.x和2.x。</p>
+<p><strong>从客户端来看，SSH提供两种级别的安全验证。</strong></p>
+<p>第一种级别（基于口令的安全验证）只要你知道自己帐号和口令，就可以登录到远程主机。所有传输的数据都会被加密，但是不能保证你正在连接的服务器就是你想连接的服务器。可能会有别的服务器在冒充真正的服务器，也就是受到“中间人”这种方式的攻击。</p>
+<p>第二种级别（基于密匙的安全验证）。也就是你必须为自己创建一对密匙，并把公匙放在需要访问的服务器上。如果你要连接到远程服务器，客户端软件就会向服务器发出请求，服务器收到请求之后，先在你的根目录下寻找你的公匙，然后把它和你存在远程服务器上的公匙进行比较，如果两个密钥一致，服务器就用该公钥加密「质询」（challenge）并把它发送给客户端软件，客户端再用自己的私钥进行解密。从而避免被「中间人」攻击。</p>
+<p><a href="http://freeloda.blog.51cto.com/2033581/1216374" target="_blank" rel="external">ssh 工作原理详解</a></p>
+<h2 id="2-什么是-SSL／TLS"><a href="#2-什么是-SSL／TLS" class="headerlink" title="2. 什么是 SSL／TLS"></a>2. 什么是 SSL／TLS</h2><p><strong>SSL (Secure Sockets Layer 安全套接层)，是一种国际标准的加密及身份认证通信协议。</strong></p>
+<p>SSL（Secure Sockets Layer）最初是由美国Netscape公司研究出来的，后来成为了Internet网上安全通讯与交易的标准。SSL协议使用通讯双方的客户证书以及CA根证书，允许客户/服务器应用以一种不能被偷听的方式通讯，在通讯双方间建立起了一条安全的、可信任的通讯通道。</p>
+<p>它具备以下基本特征：信息保密性、信息完整性、相互鉴定。 主要用于提高应用程序之间数据的安全系数。</p>
+<p><strong>SSL协议的整个概念可以被总结为：一个保证任何安装了安全套接字的客户和服务器间事务安全的协议，它涉及所有TC/IP应用程序。</strong></p>
+<p>SSL协议的优势在于它是与应用层协议独立无关的。高层的应用层协议（例如：HTTP、FTP、Telnet等等）能透明的建立于SSL协议之上。</p>
+<blockquote>
+<p>TLS 是SSL 的高级版本。 IETF将其进行了标准化，并改名为TLS。</p>
+</blockquote>
+<p><strong>简单理解区别: SSL 只是数据加密，而 SSH 则包括三部分， 连接， 认证和加密。</strong></p>
+<h2 id="3-OpenSSH-和-OpenSSL"><a href="#3-OpenSSH-和-OpenSSL" class="headerlink" title="3. OpenSSH 和 OpenSSL"></a>3. OpenSSH 和 OpenSSL</h2><p><strong>OpenSSL —— 一个C语言函数库，是对SSL协议的实现。</strong></p>
+<p><strong>OpenSSH —– 是SSH的开源实现，因此用户可以免费使用到这种安全服务。</strong></p>
+<p><strong>OpenSSH</strong> 是个SSH的软件，<strong>OpenSSL</strong> 是一个安全套接字层密码库，囊括主要的密码算法、常用的密钥和证书封装管理功能及SSL协议，并提供丰富的应用程序。比如很多程序安装依赖 <strong>openssl</strong> 头文件。</p>
+<p><strong>简单说，openssl 是一种加密方式，openssh 程序利用了这种方式。</strong></p>
 
       
     </div>
@@ -391,7 +371,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/nginx/" rel="tag"># nginx</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
         </div>
       
@@ -404,15 +384,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/10/11/初始-supervisor-一个强大的进程管理工具/" rel="next" title="初始 supervisor: 一个强大的进程管理工具">
+                <i class="fa fa-chevron-left"></i> 初始 supervisor: 一个强大的进程管理工具
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/10/如何实现-mysql-服务器的高可用/" rel="prev" title="如何实现 mysql 服务器的高可用">
-                如何实现 mysql 服务器的高可用 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -561,7 +541,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#正向代理"><span class="nav-number">1.</span> <span class="nav-text">正向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">1.1.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#反向代理"><span class="nav-number">2.</span> <span class="nav-text">反向代理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景-1"><span class="nav-number">2.1.</span> <span class="nav-text">应用场景</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-什么是-SSH"><span class="nav-number">1.</span> <span class="nav-text">1. 什么是 SSH</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-什么是-SSL／TLS"><span class="nav-number">2.</span> <span class="nav-text">2. 什么是 SSL／TLS</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-OpenSSH-和-OpenSSL"><span class="nav-number">3.</span> <span class="nav-text">3. OpenSSH 和 OpenSSL</span></a></li></ol></div>
             
 
           </div>
