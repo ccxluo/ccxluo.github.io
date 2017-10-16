@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/100954-fac6b90588bec446.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 <meta property="og:image" content="http://jbcdn2.b0.upaiyun.com/2017/05/09fa2267ee490d8f375cc69f995b8272.jpeg">
 <meta property="og:image" content="http://jbcdn2.b0.upaiyun.com/2017/05/b1acadba56e9bd7b9bd9893a2769ff53.png">
-<meta property="og:updated_time" content="2017-10-16T13:43:08.000Z">
+<meta property="og:updated_time" content="2017-10-16T13:53:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从输入URL到页面加载的完整流程">
 <meta name="twitter:description" content="这个问题已经被问过很多次了，每次都是当时去查查，然后过段时间就忘了，以至于一直都是迷迷糊糊的，事实证明，好记性不如烂笔头。 总体来说分为以下几个步骤：   输入 URL URL解析/DNS解析查找域名IP地址 网络连接发起HTTP请求 HTTP报文传输过程 服务器接收数据 服务器处理请求并返回HTTP报文 浏览器加载/渲染页面 浏览器发送请求获取嵌入在 HTML 中的资源（如图片、音频、视频、CS">
@@ -339,7 +339,7 @@
 
       
         <p>这个问题已经被问过很多次了，每次都是当时去查查，然后过段时间就忘了，以至于一直都是迷迷糊糊的，事实证明，好记性不如烂笔头。</p>
-<p>总体来说分为以下几个步骤：</p>
+<p><strong>总体来说分为以下几个步骤：</strong></p>
 <blockquote>
 <ol>
 <li>输入 URL</li>
@@ -438,6 +438,9 @@
 <h2 id="8-浏览器发送请求获取嵌入在-HTML-中的资源（如图片、音频、视频、CSS、JS等等）"><a href="#8-浏览器发送请求获取嵌入在-HTML-中的资源（如图片、音频、视频、CSS、JS等等）" class="headerlink" title="8. 浏览器发送请求获取嵌入在 HTML 中的资源（如图片、音频、视频、CSS、JS等等）"></a>8. 浏览器发送请求获取嵌入在 HTML 中的资源（如图片、音频、视频、CSS、JS等等）</h2><p>浏览器在解析过程中，如果遇到请求外部资源时，如图像,iconfont,JS等。浏览器将重复1-7过程下载该资源。请求过程是异步的，并不会影响HTML文档进行加载，但是当文档加载过程中遇到JS文件，HTML文档会挂起渲染过程，不仅要等到文档中JS文件加载完毕还要等待解析执行完毕，才会继续HTML的渲染过程。原因是因为JS有可能修改DOM结构，这就意味着JS执行完成前，后续所有资源的下载是没有必要的，这就是JS阻塞后续资源下载的根本原因。CSS文件的加载不影响JS文件的加载，但是却影响JS文件的执行。JS代码执行前浏览器必须保证CSS文件已经下载并加载完毕。</p>
 <h2 id="9-连接结束，页面构建完成"><a href="#9-连接结束，页面构建完成" class="headerlink" title="9. 连接结束，页面构建完成"></a>9. 连接结束，页面构建完成</h2><p>至此，一次完整的页面加载过程就结束了。等到下一次请求页面的时候又会重复这个过程。</p>
 <h2 id="写在最后（web-优化）"><a href="#写在最后（web-优化）" class="headerlink" title="写在最后（web 优化）"></a>写在最后（web 优化）</h2><p>可以看出上述过程是比较复杂的，因此如果请求次数过多的话就回影响页面加载速度，这对用户是非常不友好的。故而为了尽快的加载资源，我们需要做的是能不从网络中加载的资源就不从网络中加载，合理使用缓存，将某些资源放在浏览器端。如果资源必须从网络中加载，则要考虑缩短连接时间，即DNS优化部分;减少响应内容大小，即对内容进行压缩。另一方面，如果加载的资源数比较少的话，也可以快速的响应用户。当资源到达浏览器之后，浏览器开始进行解析渲染，浏览器中最耗时的部分就是reflow，所以围绕这一部分就是考虑如何减少reflow的次数。</p>
+<hr>
+<p><strong><em>参考资料：</em></strong> </p>
+<p><a href="https://segmentfault.com/a/1190000006879700" target="_blank" rel="external">https://segmentfault.com/a/1190000006879700</a><br><a href="http://web.jobbole.com/91239/" target="_blank" rel="external">http://web.jobbole.com/91239/</a><br><a href="http://www.jianshu.com/p/d616d887953a" target="_blank" rel="external">http://www.jianshu.com/p/d616d887953a</a></p>
 
       
     </div>
