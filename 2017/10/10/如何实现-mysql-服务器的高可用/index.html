@@ -362,7 +362,7 @@
 <p> <strong>创建一个 mysql 的账号用于连接</strong></p>
 <p> <img src="/2017/10/10/如何实现-mysql-服务器的高可用/3.png" alt=""></p>
 <p>  类似上图中的用户，例如创建一个 remote 用户，密码为‘remote’，设置成所有 ip 都可访问的，并授予其所有权限，命令如下：</p>
-  <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">mysql&gt; CREATE User &apos;remote&apos;@&apos;%&apos; IDENTIFIED BY &apos;remote&apos;;</div><div class="line"></div><div class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &apos;remote&apos;@&apos;%&apos;;</div><div class="line"></div><div class="line">mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
+  <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">mysql&gt; CREATE User &apos;remote&apos;@&apos;%&apos; IDENTIFIED BY &apos;remote&apos;;</div><div class="line"></div><div class="line">mysql&gt; GRANT ALL PRIVILEGES ON *.* TO &apos;remote&apos;@&apos;%&apos;;</div><div class="line"></div><div class="line">mysql&gt; FLUSH PRIVILEGES;</div></pre></td></tr></table></figure>
 <p>  （友情提示：一般情况下不要使用 root 用户去做连接）</p>
 <p> 接下来就可以继续了。。。</p>
 <p> 具体操作步骤<a href="http://duyunlong.blog.51cto.com/1054716/1306841" target="_blank" rel="external">👇 戳这里 👇</a></p>
@@ -371,7 +371,7 @@
 <p> <img src="/2017/10/10/如何实现-mysql-服务器的高可用/B0C5BE6C-7DCC-46C6-B4ED-38D9A0B3EA7D.png" alt=""></p>
 <p> 但是我的其中一台 mysql 服务器的 Slave_ SQL _Running 总是显示 “no”，即使重新设置主服务器的时候显示“yes”，但是过一会就会“自动”变成“no”，以至于两台服务器的数据无法同步。</p>
 <p> <strong>最终解决方案：</strong></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mysql -p</div><div class="line">STOP SLAVE;</div><div class="line">SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;</div><div class="line">START SLAVE;</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">mysql -p</div><div class="line">STOP SLAVE;</div><div class="line">SET GLOBAL SQL_SLAVE_SKIP_COUNTER = 1;</div><div class="line">START SLAVE;</div></pre></td></tr></table></figure>
 <p> <strong><em>注意：</em></strong> 主从方式的设置见<a href="http://369369.blog.51cto.com/319630/790921" target="_blank" rel="external">👇 这里 👇</a> </p>
 <h4 id="2-如何实时监控-mysql-服务器的状态"><a href="#2-如何实时监控-mysql-服务器的状态" class="headerlink" title="2. 如何实时监控 mysql 服务器的状态"></a>2. 如何实时监控 mysql 服务器的状态</h4><p> 在第一步中我们已经设置了 mysql 能被其他机器访问到并且创建了账户，因此这一步可以使用刚才创建的用户访问 mysql 并查看其状态判断有没有宕机。</p>
 <p> 对于 mysql 运行状态的检测有以下几种方法：</p>
@@ -380,17 +380,17 @@
 <p> <strong>答案是：使用 crontab</strong></p>
 <p> <strong>crontab</strong> 是 Linux 下的一个命令，我们可以使用它实现定时任务。</p>
 <p> 先去 Ubuntu 的 /etc 目录下看看，我们都知道 /etc 目录主要用来存放系统中的配置文件，基本上所有的配置文件都可以在这里找到。运行以下命令看看：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ls /etc/cron*</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">ls /etc/cron*</div></pre></td></tr></table></figure>
 <p> 这个命令会列出/etc目录下所有以cron开头的文件和文件夹。可以看到主要有以下文件夹：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/etc/cron.hourly 这里存放了每小时需要运行的脚本</div><div class="line">/etc/cron.daily 这里存放了每天需要运行的脚本</div><div class="line">/etc/cron.weekly 这里存放了每个星期需要运行的脚本</div><div class="line">/etc/cron.monthly 这里存放了每月需要运行的脚本</div><div class="line">/etc/cron.d 如果既不是按小时，也不按天，周和月来运行，就放在这个文件夹</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/etc/cron.hourly 这里存放了每小时需要运行的脚本</div><div class="line">/etc/cron.daily 这里存放了每天需要运行的脚本</div><div class="line">/etc/cron.weekly 这里存放了每个星期需要运行的脚本</div><div class="line">/etc/cron.monthly 这里存放了每月需要运行的脚本</div><div class="line">/etc/cron.d 如果既不是按小时，也不按天，周和月来运行，就放在这个文件夹</div></pre></td></tr></table></figure>
 <p> 当我们把脚本放到对应目录下之后，系统就会按照目录所对应的规则定时执行脚本。</p>
 <p> 由于cron 是Linux的内置服务，但它不自动起来，可以用以下的方法启动、关闭这个服务：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">service cron start //启动服务</div><div class="line">service cron stop //关闭服务</div><div class="line">service cron restart //重启服务</div><div class="line">service cron reload //重新载入配置</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">service cron start //启动服务</div><div class="line">service cron stop //关闭服务</div><div class="line">service cron restart //重启服务</div><div class="line">service cron reload //重新载入配置</div></pre></td></tr></table></figure>
 <p> 如果我们想要一些自定义的服务呢，例如我想让脚本每 5 分钟执行一次，这时 crontab 提供的定时机制就不能满足需求了。</p>
 <p> 在命令行输入 <strong>crontab -e</strong>， 就会出现一个文件，让你填写对应的定时规则（在这之前有可能会让你选编辑器，选一个就好了）</p>
 <p> 那么这个规则是什么？</p>
 <p> 类似 jenkins 执行的定时规则，</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123;minute&#125; &#123;hour&#125; &#123;day-of-month&#125; &#123;month&#125; &#123;day-of-week&#125; &#123;full-path-to-shell-script&#125;</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">&#123;minute&#125; &#123;hour&#125; &#123;day-of-month&#125; &#123;month&#125; &#123;day-of-week&#125; &#123;full-path-to-shell-script&#125;</div></pre></td></tr></table></figure>
 <p> minute：区间为0–59；</p>
 <p> hour：区间为0–23；</p>
 <p> day-of-month：区间为0–31；</p>
@@ -403,15 +403,15 @@
 <p> ,：分开几个离散的数字。</p>
 <p> (类似 jenkins 中的定时规则)</p>
 <p> <strong>因此，对于上面提到的每五分钟运行一次的需求，步骤如下：</strong></p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">1. crontab -e    ---- 编辑设置规则的文件</div><div class="line">2. */5 * * * *  path/to/script &gt;&gt; /path/to/log</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">1. crontab -e    ---- 编辑设置规则的文件</div><div class="line">2. */5 * * * *  path/to/script &gt;&gt; /path/to/log</div></pre></td></tr></table></figure>
 <p> 编辑完成，保存完成以后，就会显示以下提示信息：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">crontab: installing new crontab</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">crontab: installing new crontab</div></pre></td></tr></table></figure>
 <p> 如果没有这条提示信息，请重新运行 crontab -e 命令</p>
 <p> <strong>（记得重启 crontab 服务）service cron restart</strong></p>
 <p> ok，搞定了，现在系统就会每 5 分钟运行一次脚本了。</p>
 <h4 id="3-如何动态变化-hosts-地址映射"><a href="#3-如何动态变化-hosts-地址映射" class="headerlink" title="3. 如何动态变化 hosts 地址映射"></a>3. 如何动态变化 hosts 地址映射</h4><p> 最后一步了，如何在发现 mysql 运行异常的时候自动切换到另一台机器上呢。</p>
 <p> 脚本内容如下：</p>
- <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">USER=root</div><div class="line">PASS=root</div><div class="line">remote_server_ip=`cat /etc/hosts |grep &apos;mysql_machine&apos;|awk &apos;&#123;print $1&#125;&apos;`</div><div class="line"></div><div class="line">default_ip=192.168.30.25</div><div class="line"></div><div class="line">mysqladmin -h$remote_server_ip -u$USER ping -p$PASS &amp;&gt;/dev/null  ###user should  have mysql permission on remote server. Ideally you should use different user than root.</div><div class="line"></div><div class="line">if [ $? -eq 0 ]</div><div class="line">  then</div><div class="line">    echo &quot;connecting successfully&quot;</div><div class="line">  else</div><div class="line">    if [ &quot;$remote_server_ip&quot; == &quot;$default_ip&quot; ]</div><div class="line">      then</div><div class="line">        sudo sed -i &apos;s/192.168.30.25/192.168.30.15/g&apos; /etc/hosts</div><div class="line">      else</div><div class="line">        sudo sed -i &apos;s/192.168.30.15/192.168.30.25/g&apos; /etc/hosts</div><div class="line">    fi</div></pre></td></tr></table></figure>
+ <figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">USER=root</div><div class="line">PASS=root</div><div class="line">remote_server_ip=`cat /etc/hosts |grep &apos;mysql_machine&apos;|awk &apos;&#123;print $1&#125;&apos;`</div><div class="line"></div><div class="line">default_ip=192.168.30.25</div><div class="line"></div><div class="line">mysqladmin -h$remote_server_ip -u$USER ping -p$PASS &amp;&gt;/dev/null  ###user should  have mysql permission on remote server. Ideally you should use different user than root.</div><div class="line"></div><div class="line">if [ $? -eq 0 ]</div><div class="line">  then</div><div class="line">    echo &quot;connecting successfully&quot;</div><div class="line">  else</div><div class="line">    if [ &quot;$remote_server_ip&quot; == &quot;$default_ip&quot; ]</div><div class="line">      then</div><div class="line">        sudo sed -i &apos;s/192.168.30.25/192.168.30.15/g&apos; /etc/hosts</div><div class="line">      else</div><div class="line">        sudo sed -i &apos;s/192.168.30.15/192.168.30.25/g&apos; /etc/hosts</div><div class="line">    fi</div></pre></td></tr></table></figure>
 <p> <strong>说明：</strong></p>
 <p>  首先获得 /etc/hosts 中 ‘mysql_chine’ 这一项的对应 ip 地址存到变量里，每次发现 mysql 异常的时候就改变这一项的 ip 地址；</p>
 <p>  <strong>$?</strong> 表示上一条运行的命令的返回状态，如果是 0 则运行成功，否则运行出错（正是通过尝试连接 mysql的状态判断 mysql 是否正常运作）</p>
@@ -532,7 +532,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -545,7 +545,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>

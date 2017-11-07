@@ -337,7 +337,7 @@
 <p>例如，启动项目的命令为 “java -jar xxx.jar”，这时虽然已经启动项目了，但是由于当前进程无法自行终止，始终处于坚听状态，故而 pipeline 永远停不下来。</p>
 <a id="more"></a>
 <h2 id="粗鲁的方法"><a href="#粗鲁的方法" class="headerlink" title="粗鲁的方法"></a>粗鲁的方法</h2><p>解决这个问题一个最粗鲁的方法就是将命令抛到后台执行，命令如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup java -jar xxx.jar &amp;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">nohup java -jar xxx.jar &amp;</div></pre></td></tr></table></figure>
 <p><strong>“&amp;”</strong> 是shell的命令，它将命令抛到后台运行，这样就不会一直处于监听状态；</p>
 <p><strong>nohup</strong> 是为了让命令所在的子进程和他所在的 session 分离；</p>
 <p>例如若使用 ansible 脚本运行该命令，该命令属于 ansible 这个 session 的子进程，则在 playbook 运行完之前命令是在后台运行着的，一旦 playbook 运行完成 session 结束子进程也就跟着结束了，这显然不是我们希望的，所以需要将子进程分离出来。</p>
@@ -348,7 +348,7 @@
 <p><strong>这时，优雅的做法出现了 —— 进程管理工具。</strong></p>
 <h2 id="使用-supervisor-管理进程"><a href="#使用-supervisor-管理进程" class="headerlink" title="使用 supervisor 管理进程"></a>使用 supervisor 管理进程</h2><h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><p>进程管理工具可以帮我们管理这些进程，我们不再需要自己判断端口找到对应进程之类的操作，由于我目前只用过 supervisor，因此主要介绍 supervisor 的使用方法。</p>
 <p><strong>Supervisor是一个Linux下用Python开发的进程管理工具，提供了web管理界面，通过配置需要监控的进程，可以很方便的监控并管理进程，更厉害的是，当监控的进程因为各种原因断开的时候，能自定重启该进程。</strong></p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install supervisor</div></pre></td></tr></table></figure>
+<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo apt-get install supervisor</div></pre></td></tr></table></figure>
 <ol>
 <li><p>安装完成后，会在 /usr/bin 下加入三个命令：</p>
 <p><img src="/2017/10/11/初始-supervisor-一个强大的进程管理工具/2.png" alt=""></p>
@@ -377,7 +377,7 @@
 <li><p>stdout_logfile 用来设置 log 文件的路径</p>
 <p>好了，现在启动 supervisor 就可以正常工作了。</p>
 <p>启动命令：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo supervisord</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">sudo supervisord</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <p> 启动之后，可在进程列表中看到对应进程，当用 kill 命令杀死进程后会发现 supervisor 再次重启了这个进程，哦了。</p>
@@ -504,7 +504,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -517,7 +517,7 @@
               
               <div class="site-state-item site-state-tags">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 
               </div>
