@@ -93,7 +93,7 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type: html
+  type: git
   repo: https://github.com/XLuoChen/xluochen.github.io
   branch: master
 
