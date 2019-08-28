@@ -1,7 +1,9 @@
 ---
 title: Docker VS 虚拟机
 date: 2017-11-07
-tags: docker, 虚拟机, linux
+tags: [Docker, 虚拟机, Linux]
+categories: [运维相关]
+comments: true
 ---
 
 ## 1. docker 是什么

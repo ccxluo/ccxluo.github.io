@@ -1,7 +1,8 @@
 ---
 title: 如何实现 mysql 服务器的高可用
 date: 2017-10-10
-tags: devops
+tags: [Devops]
+categories: [运维相关]
 ---
 
 ### 什么是高可用

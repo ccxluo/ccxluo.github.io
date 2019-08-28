@@ -1,7 +1,8 @@
 ---
 title: SSH、SSL 以及 OpenSSH、OpenSSL 的区别
 date: 2017-10-16
-tags: linux
+tags: [Linux]
+categories: [Linux]
 ---
 
 ## 什么是 SSH

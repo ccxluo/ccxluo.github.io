@@ -1,7 +1,10 @@
 ---
 title: '初识supervisor: 一个强大的进程管理工具'
 date: 2017-10-11 
-tags: deveops
+tags: [工具, 进程]
+categories: 
+ - [运维相关]
+ - [工具分享]
 ---
 
 ## 背景介绍

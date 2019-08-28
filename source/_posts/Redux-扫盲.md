@@ -2,6 +2,7 @@
 title: Redux 扫盲
 date: 2018-03-25 
 tags: 前端
+categories: [前端]
 ---
 
 ## 1. Redux 是什么，能做什么
