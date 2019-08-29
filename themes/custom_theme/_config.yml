@@ -666,7 +666,7 @@ livere_uid: # <your_uid>
 # Demo: https://gitalk.github.io
 # For more information: https://github.com/gitalk/gitalk
 gitalk:
-  enable: true
+  enable: false
   github_id: XLuoChen
   repo: blog_comments
   client_id: 5ce9aad4ca207512cf22
