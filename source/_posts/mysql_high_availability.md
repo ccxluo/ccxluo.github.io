@@ -35,7 +35,7 @@ categories: [运维相关]
 
 ### 方案设计
 
-[![image](https://upload-images.jianshu.io/upload_images/3028410-117900f0e70f8663.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/10/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-mysql-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8/2.png) 
+![](image1.png)
 
 **此次方案采用主 – 主架构**
 
@@ -57,7 +57,7 @@ categories: [运维相关]
 
 **创建一个 mysql 的账号用于连接**
 
-[![image](https://upload-images.jianshu.io/upload_images/3028410-443df61bb72dafa2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/10/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-mysql-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8/3.png) 
+![](image2.png)
 
 类似上图中的用户，例如创建一个 remote 用户，密码为‘remote’，设置成所有 ip 都可访问的，并授予其所有权限，命令如下：
 
@@ -81,7 +81,7 @@ mysql> FLUSH PRIVILEGES;
 
 另外补充一个遇到的问题，在按照上述教程配置完两个 mysql 服务器后，正常情况下当查看 slave 状态时下图两项应该显示“yes”
 
-[![image](https://upload-images.jianshu.io/upload_images/3028410-d69cbcdf8967638b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/10/10/%E5%A6%82%E4%BD%95%E5%AE%9E%E7%8E%B0-mysql-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%AB%98%E5%8F%AF%E7%94%A8/B0C5BE6C-7DCC-46C6-B4ED-38D9A0B3EA7D.png) 
+![](image3.png)
 
 但是我的其中一台 mysql 服务器的 Slave_ SQL _Running 总是显示 “no”，即使重新设置主服务器的时候显示“yes”，但是过一会就会“自动”变成“no”，以至于两台服务器的数据无法同步。
 

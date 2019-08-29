@@ -8,7 +8,7 @@ comments: true
 
 ## 1. docker 是什么
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-80e6032eaed193b3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/11/07/Docker-VS-%E8%99%9A%E6%8B%9F%E6%9C%BA/docker.jpg) 
+![](docker_logo.jpg)
 
 Docker 的思想来自于集装箱。例如在一艘大船上，可以把货物规整的摆放起来。并且各种各样的货物被集装箱标准化了，集装箱和集装箱之间不会互相影响。那么就不需要专门运送水果的船和专门运送化学品的船了。只要这些货物在集装箱里封装的好好的，那就可以用一艘大船把他们都运走。
 
@@ -85,7 +85,7 @@ Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需�
 
 ## 4. docker 和 虚拟机思想上的区别
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-b0476fbede529d63.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/11/07/Docker-VS-%E8%99%9A%E6%8B%9F%E6%9C%BA/docker_vs_vritualbox.png)
+![](architecture.jpg)
 
 ### 虚拟机
 
@@ -124,13 +124,13 @@ Docker有着小巧、迁移部署快速、运行高效等特点，但隔离性�
 
 **物理机**
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-f39c466aa436d0e6.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/11/07/Docker-VS-%E8%99%9A%E6%8B%9F%E6%9C%BA/real-machine.jpg) 
+![](physical_machine.jpg)
 
 **虚拟机**
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-238808827204ddd3.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/11/07/Docker-VS-%E8%99%9A%E6%8B%9F%E6%9C%BA/virtrualbox.jpg) 
+![](virtual_machine.jpg)
 
 **容器**
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-529ac90e5833e80f.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/11/07/Docker-VS-%E8%99%9A%E6%8B%9F%E6%9C%BA/container.jpg)
+![](container.jpg)
 

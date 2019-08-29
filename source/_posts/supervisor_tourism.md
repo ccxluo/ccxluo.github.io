@@ -54,7 +54,7 @@ sudo apt-get install supervisor
 
 1.  安装完成后，会在 /usr/bin 下加入三个命令：
 
-    [![image](https://upload-images.jianshu.io/upload_images/3028410-022a4f2116715ce0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/10/11/%E5%88%9D%E5%A7%8B-supervisor-%E4%B8%80%E4%B8%AA%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/2.png) 
+    ![](image1.png)
 
     *   echo_superisord_conf 生成一个配置文件示例（建议仅做学习了解使用）
     *   supervisord 服务端
@@ -71,7 +71,7 @@ sudo apt-get install supervisor
 
 如下图所示：
 
-[![image](https://upload-images.jianshu.io/upload_images/3028410-4257e1f3e682f652.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2017/10/11/%E5%88%9D%E5%A7%8B-supervisor-%E4%B8%80%E4%B8%AA%E5%BC%BA%E5%A4%A7%E7%9A%84%E8%BF%9B%E7%A8%8B%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/1.png) 
+![](image2.png)
 
 *   program 后面跟的是程序的名称，可以任意取，是为了区分同文件中的多个程序的
 *   command 后面设置程序的启动命令

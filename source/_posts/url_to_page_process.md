@@ -43,19 +43,19 @@ DNS（Domain Name System，域名系统），因特网上作为域名和IP地址
 
     如图所示的是递归方式。局部DNS服务器自己负责向其他DNS服务器进行查询，一般是先向该域名的根域服务器查询，再由根域名服务器一级级向下查询。最后得到的查询结果返回给局部DNS服务器，再由局部DNS服务器返回给客户端。
 
-![](https://upload-images.jianshu.io/upload_images/3028410-384d5cc01e197e8c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](image1.png)
 
 *   **迭代查询**
 
     如图所示。局部DNS服务器不是自己向其他DNS服务器进行查询，而是把能解析该域名的其他DNS服务器的IP地址返回给客户端DNS程序，客户端DNS程序再继续向这些DNS服务器进行查询，直到得到查询结果为止。也就是说，迭代解析只是帮你找到相关的服务器而已，而不会帮你去查。比如说：baidu.com的服务器ip地址在192.168.4.5这里，你自己去查吧，本人比较忙，只能帮你到这里了。
 
-![](https://upload-images.jianshu.io/upload_images/3028410-0024b87d980f1296.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](image2.png)
 
 ### 3) DNS 解析过程
 
 DNS解析是一个递归查询的过程。但是在整个获取ip地址的过程中同时使用了以上两种解析方式。
 
-![](https://upload-images.jianshu.io/upload_images/3028410-0b3ad0ebe1bec7da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](image3.png)
 
 上述图片是查找www.google.com的IP地址过程。
 
@@ -79,7 +79,7 @@ DNS解析是一个递归查询的过程。但是在整个获取ip地址的过程
 
 互联网内各网络设备间的通信都遵循TCP/IP协议，利用TCP/IP协议族进行网络通信时，会通过分层顺序与对方进行通信。分层由高到低分别为：应用层、传输层、网络层、数据链路层。发送端从应用层往下走，接收端从数据链路层网上走。如图所示：
 
-[![image](http://upload-images.jianshu.io/upload_images/100954-5272cd06ebf5f4e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](http://upload-images.jianshu.io/upload_images/100954-5272cd06ebf5f4e6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
+![](image4.png)
 
 从上面的步骤中得到 IP 地址后，浏览器会开始构造一个 HTTP 请求。这部分主要发生在客户端。发送HTTP请求的过程就是构建HTTP请求报文并通过TCP协议中发送到服务器指定端口(HTTP协议80/8080, HTTPS协议443)。
 
@@ -117,7 +117,7 @@ Accept用于指定客户端用于接受哪些类型的信息，Accept-Encoding�
 
 **“三次握手”**的过程是，发送端先发送一个带有SYN（synchronize）标志的数据包给接收端，在一定的延迟时间内等待接收的回复。接收端收到数据包后，传回一个带有SYN/ACK标志的数据包以示传达确认信息。接收方收到后再发送一个带有ACK标志的数据包给接收端以示握手成功。在这个过程中，如果发送端在规定延迟时间内没有收到回复则默认接收方没有收到请求，而再次发送，直到收到回复为止。
 
-[![image](http://upload-images.jianshu.io/upload_images/100954-fac6b90588bec446.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](http://upload-images.jianshu.io/upload_images/100954-fac6b90588bec446.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240) 
+![](image5.png)
 
 ### 2) 网络层IP协议查询MAC地址
 
@@ -174,7 +174,7 @@ IP协议的作用是把TCP分割好的各种数据包封装到IP包里面传送�
 
 > 解析html以构建dom树 -> 构建render树 -> 布局render树 -> 绘制render树
 
-![](https://upload-images.jianshu.io/upload_images/3028410-8947cbeb44c2c189.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](image6.png)
 
 浏览器在解析html文件时，会”自上而下“加载，并在加载过程中进行解析渲染。在解析过程中，如果遇到请求外部资源时，如图片、外链的CSS、iconfont等，请求过程是异步的，并不会影响html文档进行加载。
 
@@ -184,7 +184,7 @@ DOM节点中的各个元素都是以盒模型的形式存在，这些都需要�
 
 页面在首次加载时必然会经历reflow和repain。reflow和repain过程是非常消耗性能的，尤其是在移动设备上，它会破坏用户体验，有时会造成页面卡顿。所以我们应该尽可能少的减少reflow和repain。
 
-![](https://upload-images.jianshu.io/upload_images/3028410-55ee0586d9d55050.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](image7.png)
 
 JS的解析是由浏览器中的JS解析引擎完成的。JS是单线程运行，也就是说，在同一个时间内只能做一件事，所有的任务都需要排队，前一个任务结束，后一个任务才能开始。但是又存在某些任务比较耗时，如IO读写等，所以需要一种机制可以先执行排在后面的任务，这就是：**同步任务(synchronous)和异步任务(asynchronous)。**JS的执行机制就可以看做是一个主线程加上一个任务队列(task queue)。同步任务就是放在主线程上执行的任务，异步任务是放在任务队列中的任务。所有的同步任务在主线程上执行，形成一个执行栈;异步任务有了运行结果就会在任务队列中放置一个事件；脚本运行时先依次运行执行栈，然后会从任务队列里提取事件，运行任务队列中的任务，这个过程是不断重复的，所以又叫做事件循环(Event loop)。
 

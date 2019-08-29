@@ -9,7 +9,7 @@ categories: [前端]
 
 对于 React 应用来说，为了实现页面上的各种交互我们必然要使用到 state 去管理页面状态，对于简单应用来说仅仅使用 React 的 state 尚且能够实现，但是随着应用复杂度变高以及页面交互逐渐增多，单单用静态的 React 去做数据交互会使整个项目变得冗杂臃肿。所以这里我们需要一个“东西”帮我们完美地处理这些数据，因此 Redux 应运而生。
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-ae20035c3f388004.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2018/03/25/Redux-%E6%89%AB%E7%9B%B2/logo.png) 
+![](redux_logo.png)
 
 **Redux 是 facebook 提出的 flux 架构的一种优秀实现；而且不局限于为 react 提供数据状态处理。它是零依赖的，可以配合其他任何框架或者类库一起使用。**
 
@@ -29,7 +29,7 @@ categories: [前端]
 
 Flux 使用**单向数据流**（见下图）方式来避开 MVC. 当用户与 React 视图交互的时候，视图会通过中枢dispatcher 产生一个 action。然后大量的保存着应用数据和业务逻辑的视图接收到冒泡的 action，更新所有受影响的 view。这种方式很适合 React 这种声明式的编程方式，因为它的 store 更新，并不需要特别指定如何在 view 和 state 中过渡。
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-f87ba365b7e3e591.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2018/03/25/Redux-%E6%89%AB%E7%9B%B2/flux.png) 
+![](redux_flow.png)
 
 如果想详细了解 Flux 可参见[这里](http://www.ruanyifeng.com/blog/2016/01/flux.html)
 
@@ -155,7 +155,7 @@ store.dispatch(authUser(authInfo));
 
 Redux 架构采用严格的**单向数据流**。这意味着应用中所有的数据都遵循相同的生命周期，这样可以让应用变得更加可预测且容易理解。
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-f58941249acbcd04.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2018/03/25/Redux-%E6%89%AB%E7%9B%B2/redux.png) 
+![](redux_principle.png)
 
 以上图为例，Redux 应用中数据的生命周期为：
 
@@ -244,7 +244,7 @@ Redux 可以结合框架和类库一起使用，Redux 官方提供的 react-redu
 
 react-redux 提供了 Provider 标签，我们需要在 rendering 之前将 root component 包含在<provider>标签之内，Provider 有个属性 store 把我们创建的 store 传入，用法如下：</provider>
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-fc48a085a685fb37.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2018/03/25/Redux-%E6%89%AB%E7%9B%B2/react-redux1.png) 
+![](code1.png)
 
 上面这段代码，使得<provider>标签下面的Components都能访问到store instance。（内部是通过React的“context”特性来实现的）。</provider>
 
@@ -254,7 +254,7 @@ react-redux 提供了 Provider 标签，我们需要在 rendering 之前将 root
 
 其中，dispatch function 的获取很简单，我们在 component 内部只需要直接使用this.props.dispatch 就能拿到一个用来 dispatch actions 的 function。而对于 component所需要的 state 数据，则需要一个额外的 selector function 作为 connect 的参数传入，这个selector function 的参数是 global Redux store’s state，它会把这个 global state 进行变换，处理成 component 所需要的数据返回。看下面的代码：
 
-[![](https://upload-images.jianshu.io/upload_images/3028410-f092fba7e063d849.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)](https://xluochen.github.io/2018/03/25/Redux-%E6%89%AB%E7%9B%B2/react-redux2.png) 
+![](code2.png)
 
 通过这种方式，我们就可以在页面上随意地使用 state 中的数据了。
 
