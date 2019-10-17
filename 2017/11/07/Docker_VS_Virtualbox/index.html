@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.3.0">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.3.0">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.3.0" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.3.0">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.3.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
+    }
+  };
+</script>
+
+  <meta name="description" content="1. docker 是什么 Docker 的思想来自于集装箱。例如在一艘大船上，可以把货物规整的摆放起来。并且各种各样的货物被集装箱标准化了，集装箱和集装箱之间不会互相影响。那么就不需要专门运送水果的船和专门运送化学品的船了。只要这些货物在集装箱里封装的好好的，那就可以用一艘大船把他们都运走。 以 docker 的 logo 来说，那个大鲸鱼（或者是货轮）就是操作系统，把要交付的应用程序看成是各种">
+<meta name="keywords" content="Docker,虚拟机,Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker VS 虚拟机">
+<meta property="og:url" content="http://yoursite.com/2017/11/07/Docker_VS_Virtualbox/index.html">
+<meta property="og:site_name" content="Adai&#39;s notes">
+<meta property="og:description" content="1. docker 是什么 Docker 的思想来自于集装箱。例如在一艘大船上，可以把货物规整的摆放起来。并且各种各样的货物被集装箱标准化了，集装箱和集装箱之间不会互相影响。那么就不需要专门运送水果的船和专门运送化学品的船了。只要这些货物在集装箱里封装的好好的，那就可以用一艘大船把他们都运走。 以 docker 的 logo 来说，那个大鲸鱼（或者是货轮）就是操作系统，把要交付的应用程序看成是各种">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://yoursite.com/2017/11/07/Docker_VS_Virtualbox/docker_logo.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/11/07/Docker_VS_Virtualbox/architecture.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/11/07/Docker_VS_Virtualbox/physical_machine.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/11/07/Docker_VS_Virtualbox/virtual_machine.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/11/07/Docker_VS_Virtualbox/container.jpg">
+<meta property="og:updated_time" content="2019-10-17T12:14:47.604Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker VS 虚拟机">
+<meta name="twitter:description" content="1. docker 是什么 Docker 的思想来自于集装箱。例如在一艘大船上，可以把货物规整的摆放起来。并且各种各样的货物被集装箱标准化了，集装箱和集装箱之间不会互相影响。那么就不需要专门运送水果的船和专门运送化学品的船了。只要这些货物在集装箱里封装的好好的，那就可以用一艘大船把他们都运走。 以 docker 的 logo 来说，那个大鲸鱼（或者是货轮）就是操作系统，把要交付的应用程序看成是各种">
+<meta name="twitter:image" content="http://yoursite.com/2017/11/07/Docker_VS_Virtualbox/docker_logo.jpg">
+  <link rel="canonical" href="http://yoursite.com/2017/11/07/Docker_VS_Virtualbox/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Docker VS 虚拟机 | Adai's notes</title>
+  <meta name="generator" content="Hexo 3.9.0">
+  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-146701899-1"></script>
+  <script>
+    var host = window.location.hostname;
+    if (host !== "localhost" || !true) {
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-146701899-1');
+    }
+  </script>
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <div class="container">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Adai's notes</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content page-post-detail">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  <article class="post" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/07/Docker_VS_Virtualbox/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Adai">
+      <meta itemprop="description" content="Keep running">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Adai's notes">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Docker VS 虚拟机
+
+          
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              
+                
+              
+
+              <time title="创建时间：2017-11-07 00:00:00" itemprop="dateCreated datePublished" datetime="2017-11-07T00:00:00+08:00">2017-11-07</time>
+            </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-10-17 20:14:47" itemprop="dateModified" datetime="2019-10-17T20:14:47+08:00">2019-10-17</time>
+              </span>
+            
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/运维相关/" itemprop="url" rel="index"><span itemprop="name">运维相关</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            <span class="post-meta-item" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-docker-是什么"><a href="#1-docker-是什么" class="headerlink" title="1. docker 是什么"></a>1. docker 是什么</h2><p><img src="/2017/11/07/Docker_VS_Virtualbox/docker_logo.jpg" alt></p>
+<p>Docker 的思想来自于集装箱。例如在一艘大船上，可以把货物规整的摆放起来。并且各种各样的货物被集装箱标准化了，集装箱和集装箱之间不会互相影响。那么就不需要专门运送水果的船和专门运送化学品的船了。只要这些货物在集装箱里封装的好好的，那就可以用一艘大船把他们都运走。</p>
+<p>以 docker 的 logo 来说，那个大鲸鱼（或者是货轮）就是操作系统，把要交付的应用程序看成是各种货物，原本要将各种各样形状、尺寸不同的货物放到大鲸鱼上，你得为每件货物考虑怎么安放（就是应用程序配套的环境），还得考虑货物和货物是否能叠起来（应用程序依赖的环境是否会冲突）。现在使用了集装箱（容器）把每件货物都放到集装箱里，这样大鲸鱼可以用同样地方式安放、堆叠集装了，省事省力。</p>
+<a id="more"></a>
+
+<h2 id="2-docker-的优势"><a href="#2-docker-的优势" class="headerlink" title="2. docker 的优势"></a>2. docker 的优势</h2><ul>
+<li><p><strong>更高效的利用系统资源</strong></p>
+<p>由于容器不需要进行硬件虚拟以及运行完整操作系统等额外开销，因此 Docker 对系统资源的利用率更高。无论是应用执行速度、内存损耗或者文件存储速度，都要比传统虚拟机技术更高效。因此，相比虚拟机技术，一个相同配置的主机，往往可以运行更多数量的应用。</p>
+</li>
+<li><p><strong>更快速的启动时间</strong></p>
+<p>传统的虚拟机技术启动应用服务往往需要数分钟，而 Docker 容器应用，由于直接运行于宿主内核，无需启动完整的操作系统，因此可以做到秒级、甚至毫秒级的启动时间。大大的节约了开发、测试、部署的时间。</p>
+</li>
+<li><p><strong>一致的运行环境</strong></p>
+<p>项目开发过程中可能有多种环境，例如开发环境、测试环境、生产环境等，环境的不一致，导致有些 bug 并未在开发过程中被发现。而 Docker 的镜像提供了除内核外完整的运行时环境，确保了应用运行环境一致性，也消除了在不同开发人员电脑上的环境变异性。</p>
+</li>
+<li><p><strong>持续交付和部署</strong></p>
+<p>我们可以使用 Dockerfile 定制应用镜像，因此运维人员可以在生产环境中直接部署该镜像，甚至自动部署。</p>
+</li>
+<li><p><strong>更轻松的迁移</strong></p>
+<p>由于 Docker 确保了执行环境的一致性，使得应用的迁移更加容易。Docker 可以在很多平台上运行，无论是物理机、虚拟机、公有云、私有云，甚至是笔记本，其运行结果是一致的。因此用户可以很轻易的将在一个平台上运行的应用，迁移到另一个平台上，而不用担心运行环境的变化导致应用无法正常运行的情况。</p>
+</li>
+<li><p><strong>更轻松的维护和扩展</strong></p>
+<p>Docker 使用的分层存储以及镜像的技术，使得应用重复部分的复用更为容易，也使得应用的维护更新更加简单，基于基础镜像进一步扩展镜像也变得非常简单。</p>
+</li>
+</ul>
+<h2 id="3-基本概念"><a href="#3-基本概念" class="headerlink" title="3. 基本概念"></a>3. 基本概念</h2><h3 id="镜像（imgae）"><a href="#镜像（imgae）" class="headerlink" title="镜像（imgae）"></a>镜像（imgae）</h3><p>Docker 镜像是一个特殊的文件系统，除了提供容器运行时所需的程序、库、资源、配置等文件外，还包含了一些为运行时准备的一些配置参数（如匿名卷、环境变量、用户等）。</p>
+<p>镜像不包含任何动态数据，其内容在构建之后也不会被改变。</p>
+<p><strong>分层存储</strong></p>
+<p>镜像并非由一个文件组成而是一组文件并分层级管理，每一层都基于上一层，所有的修改都是对本层级而言的，不会改变之前的层级。比如，删除前一层文件的操作，实际不是真的删除前一层的文件，而是仅在当前层标记为该文件已删除。在最终容器运行的时候，虽然不会看到这个文件，但是实际上该文件会一直跟随镜像。</p>
+<p>分层存储的特征还使得镜像的复用、定制变的更为容易。甚至可以用之前构建好的镜像作为基础层，然后进一步添加新的层，以定制自己所需的内容，构建新的镜像。</p>
+<h3 id="容器（container）"><a href="#容器（container）" class="headerlink" title="容器（container）"></a>容器（container）</h3><p><strong>镜像和容器的关系</strong></p>
+<p>容器是镜像运行的一个实例。类比类和实例，镜像是静态的定义，容器是镜像运行时的实体。</p>
+<p>容器的实质是进程，但是有别于宿主机上的进程，它可以拥有自己的命名空间，文件系统等，容器内的进程运行在一个隔离的环境里，用起来就好像是在一个独立于宿主的系统下操作一样。</p>
+<p>容器运行时也会使用分层存储，每一个容器运行时都会基于镜像在其上创建一个容器存储层，<br>该存储层与容器共存亡。</p>
+<h3 id="仓库（repo）"><a href="#仓库（repo）" class="headerlink" title="仓库（repo）"></a>仓库（repo）</h3><p><strong>使用仓库的原因：</strong></p>
+<p><strong>提供集中的存储、分发镜像的服务（docker registry），使得镜像可以运行在其他服务器上。</strong></p>
+<p>镜像构建完成后，可以很容易的在当前宿主上运行，但是，如果需要在其它服务器上使用这个镜像，我们就需要一个集中的存储、分发镜像的服务，Docker Registry 就是这样的服务。</p>
+<p>一个 Docker Registry 中可以包含多个仓库（Repository）；每个仓库可以包含多个标签（Tag）；每个标签对应一个镜像。</p>
+<p>通常，一个仓库会包含同一个软件不同版本的镜像，而标签就常用于对应该软件的各个版本。我们可以通过 &lt;仓库名&gt;:&lt;标签&gt; 的格式来指定具体是这个软件哪个版本的镜像。如果不给出标签，将以 latest 作为默认标签。以 Ubuntu 镜像为例，ubuntu 是仓库的名字，其内包含有不同的版本标签，如，14.04, 16.04。我们可以通过 ubuntu:14.04，或者 ubuntu:16.04 来具体指定所需哪个版本的镜像。如果忽略了标签，比如 ubuntu，那将视为 ubuntu:latest。</p>
+<p>仓库名经常以 两段式路径 形式出现，比如 jwilder/nginx-proxy，前者往往意味着 Docker Registry 多用户环境下的用户名，后者则往往是对应的软件名。但这并非绝对，取决于所使用的具体 Docker Registry 的软件或服务。</p>
+<p><strong>最常使用的 Registry 公开服务是官方的 Docker Hub，这也是默认的 Registry，并拥有大量的高质量的官方镜像。除了使用公开服务外，用户还可以在本地搭建私有 Docker Registry。Docker 官方提供了 Docker Registry 镜像，可以直接使用做为私有 Registry 服务。</strong></p>
+<h2 id="4-docker-和-虚拟机思想上的区别"><a href="#4-docker-和-虚拟机思想上的区别" class="headerlink" title="4. docker 和 虚拟机思想上的区别"></a>4. docker 和 虚拟机思想上的区别</h2><p><img src="/2017/11/07/Docker_VS_Virtualbox/architecture.jpg" alt></p>
+<h3 id="虚拟机"><a href="#虚拟机" class="headerlink" title="虚拟机"></a>虚拟机</h3><p>传统的虚拟机需要模拟整台机器包括硬件，每台虚拟机都需要有自己的操作系统，虚拟机一旦被开启，预分配给他的资源将全部被占用。，每一个虚拟机包括应用，必要的二进制和库，以及一个完整的用户操作系统。</p>
+<h3 id="docker"><a href="#docker" class="headerlink" title="docker"></a>docker</h3><p>容器技术是和我们的宿主机共享硬件资源及操作系统可以实现资源的动态分配。<br>容器包含应用和其所有的依赖包，但是与其他容器共享内核。容器在宿主机操作系统中，在用户空间以分离的进程运行。</p>
+<p>对于容器，它首先是一个相对独立的运行环境，在这一点有点类似于虚拟机，但是不像虚拟机那样彻底。在容器内，应该最小化其对外界的影响，比如不能在容器内把宿主机上的资源全部消耗，这就是资源控制。</p>
+<blockquote>
+<p>容器和虚拟机之间的主要区别在于虚拟化层的位置和操作系统资源的使用方式。</p>
+</blockquote>
+<p>容器与虚拟机拥有着类似的使命：对应用程序及其关联性进行隔离，从而构建起一套能够随处运行的自容纳单元。此外，容器与虚拟机还摆脱了对物理硬件的需求，允许我们更为高效地使用计算资源，从而提升能源效率与成本效益。</p>
+<h3 id="主要区别"><a href="#主要区别" class="headerlink" title="主要区别"></a>主要区别</h3><p>虚拟机会将虚拟硬件、内核（即操作系统）以及用户空间打包在新虚拟机当中，虚拟机能够利用“虚拟机管理程序”运行在物理设备之上。虚拟机依赖于 hypervisor，其通常被安装在“裸金属”系统硬件之上，这导致hypervisor 在某些方面被认为是一种操作系统。一旦 hypervisor 安装完成， 就可以从系统可用计算资源当中分配虚拟机实例了，每台虚拟机都能够获得唯一的操作系统和负载(应用程序)。简言之，虚拟机先需要虚拟一个物理环境，然后构建一个完整的操作系统，再搭建一层 Runtime，然后供应用程序运行。</p>
+<p>对于容器环境来说，不需要安装主机操作系统，直接将容器层(比如LXC或libcontainer)安装在主机操作系统(通常是Linux变种)之上。在安装完容器层之后，就可以从系统可用计算资源当中分配容器实例了，并且企业应用可以被部署在容器当中。但是，每个容器化应用都会共享相同的操作系统(单个主机操作系统)。容器可以看成一个装好了一组特定应用的虚拟机，它直接利用了宿主机的内核，抽象层比虚拟机更少，更加轻量化，启动速度极快。</p>
+<h3 id="举例说明"><a href="#举例说明" class="headerlink" title="举例说明"></a>举例说明</h3><p><strong>服务器好比运输码头</strong>：拥有场地和各种设备（服务器硬件资源）</p>
+<p><strong>虚拟机好比作码头上的仓库</strong>：拥有独立的空间堆放各种货物或集装箱(仓库之间完全独立，独立的应用系统和操作系统）</p>
+<p><strong>Docker比作集装箱</strong>：各种货物的打包(将各种应用程序和他们所依赖的运行环境打包成标准的容器,容器之间隔离)</p>
+<p>Docker有着小巧、迁移部署快速、运行高效等特点，但隔离性比服务器虚拟化差：不同的集装箱属于不同的运单（Docker上运行不同的应用实例），相互独立（隔离）。但由同一个库管人员管理（主机操作系统内核），因此通过库管人员可以看到所有集装箱的相关信息（因为共享操作系统内核，因此相关信息会共享）。</p>
+<p>虚拟机就好比在码头上（物理主机及虚拟化层），建立了多个独立的“小码头”—仓库。其拥有完全独立（隔离）的空间，属于不同的客户（虚拟机所有者）。每个仓库有各自的库管人员（当前虚拟机的操作系统内核），无法管理其它仓库。不存在信息共享的情况。</p>
+<p>如果还是不太理解，可以参照下图。</p>
+<p><strong>物理机</strong></p>
+<p><img src="/2017/11/07/Docker_VS_Virtualbox/physical_machine.jpg" alt></p>
+<p><strong>虚拟机</strong></p>
+<p><img src="/2017/11/07/Docker_VS_Virtualbox/virtual_machine.jpg" alt></p>
+<p><strong>容器</strong></p>
+<p><img src="/2017/11/07/Docker_VS_Virtualbox/container.jpg" alt></p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Docker/" rel="tag"># Docker</a>
+            
+              <a href="/tags/虚拟机/" rel="tag"># 虚拟机</a>
+            
+              <a href="/tags/Linux/" rel="tag"># Linux</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2017/10/16/SSH,SSL_VS_OpenSSH,OpenSSL/" rel="next" title="SSH、SSL 以及 OpenSSH、OpenSSL 的区别">
+                  <i class="fa fa-chevron-left"></i> SSH、SSL 以及 OpenSSH、OpenSSL 的区别
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2018/03/25/Redux_tourism/" rel="prev" title="Redux 扫盲">
+                  Redux 扫盲 <i class="fa fa-chevron-right"></i>
+                </a>
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.jpg"
+      alt="Adai">
+  <p class="site-author-name" itemprop="name">Adai</p>
+  <div class="site-description motion-element" itemprop="description">Keep running</div>
+</div>
+  <nav class="site-state motion-element">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-categories">
+        
+          
+            <a href="/categories/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">分类</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+          
+        
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span>
+        </a>
+      </div>
+    
+  </nav>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://github.com/XLuoChen" title="GitHub &rarr; https://github.com/XLuoChen" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="mailto:chengxiuluo@gmail.com" title="E-Mail &rarr; mailto:chengxiuluo@gmail.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+    
+      <span class="links-of-author-item">
+      
+      
+        
+      
+      
+        
+      
+        <a href="https://hateonion.me/" title="Friends &rarr; https://hateonion.me/" rel="noopener" target="_blank"><i class="fa fa-fw fa-users"></i>Friends</a>
+      </span>
+    
+  </div>
+
+
+
+
+        </div>
+      </div>
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-docker-是什么"><span class="nav-text">1. docker 是什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-docker-的优势"><span class="nav-text">2. docker 的优势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-基本概念"><span class="nav-text">3. 基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#镜像（imgae）"><span class="nav-text">镜像（imgae）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#容器（container）"><span class="nav-text">容器（container）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#仓库（repo）"><span class="nav-text">仓库（repo）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-docker-和-虚拟机思想上的区别"><span class="nav-text">4. docker 和 虚拟机思想上的区别</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟机"><span class="nav-text">虚拟机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#docker"><span class="nav-text">docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主要区别"><span class="nav-text">主要区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#举例说明"><span class="nav-text">举例说明</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Adai</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.9.0</div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v7.3.0</div>
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-user"></i>
+    </span>
+    <span class="site-uv" title="总访客量">
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+    <span class="post-meta-divider">|</span>
+  
+    <span class="post-meta-item-icon">
+      <i class="fa fa-eye"></i>
+    </span>
+    <span class="site-pv" title="总访问量">
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        <span>0%</span>
+      </div>
+
+    
+
+  </div>
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.3.0"></script><script src="/js/motion.js?v=7.3.0"></script>
+<script src="/js/schemes/pisces.js?v=7.3.0"></script>
+<script src="/js/next-boot.js?v=7.3.0"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+  
+  <script src="/js/scrollspy.js?v=7.3.0"></script><script src="/js/post-details.js?v=7.3.0"></script>
+
+
+</body>
+</html>
